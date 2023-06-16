@@ -1,0 +1,38 @@
+<template>
+	<lightning-card title="Movies" icon-name="utility:video">
+		<div class="slds-card__body slds-card__body_inner">
+			<!-- Start movie list -->
+			
+			<template if:true={movies.data}>
+				<lightning-input type="search"
+					onchange={handleSearchTermChange}
+					variant="label-hidden"
+					class="slds-var-m-bottom_small"
+					label="Search"
+					placeholder="Search for movies"
+					value={searchTerm}>
+				</lightning-input>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<template for:each={movies.data} for:item="movie">
+						<lightning-layout-item key={movie.Id} size="4" class="slds-var-p-around_x-small">
+							<c-movie-tile movie={movie}></c-movie-tile>
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+				<!-- No movies found -->
+				<template if:false={hasResults}>
+					<div class="slds-align_absolute-center slds-var-m-vertical_small">
+						No matching Results!
+					</div>
+				</template>
+			</template>
+			<!-- Data failed to load -->
+			<template if:true={movies.error}>
+				{movies.error}
+				<div class="slds-text-color_error">
+					An error occurred while loading the movie list
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>
