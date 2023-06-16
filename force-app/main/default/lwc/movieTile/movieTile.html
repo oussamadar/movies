@@ -1,0 +1,18 @@
+<template>
+    <lightning-card class="movie-tile">
+        <div class="slds-var-m-left_small ">
+            <div onclick={handleSelectMovie}>
+                <p><img src={movie.Poster_url__c} class="slds-var-m-bottom_small image-dem" /></p>
+            </div>
+            <div class="slds-text-heading_medium"> {movie.Name}</div>
+            <div class="slds-text-color_weak"> {movie.Category__c}</div>
+            <div class="slds-text-color_weak"> {movie.Release_date__c}</div>
+
+        </div>
+
+
+
+
+    </lightning-card>
+
+</template>
