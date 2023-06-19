@@ -1,26 +1,41 @@
 import { LightningElement, wire } from 'lwc';
 import searchMovies from '@salesforce/apex/MovieController.searchMovies';
-
+import REFRESH_MOVIE_LIST from '@salesforce/messageChannel/Refresh_List__c';
+import { refreshApex } from '@salesforce/apex';
+import { unsubscribe, MessageContext, subscribe } from 'lightning/messageService';
 export default class MoviesResults extends LightningElement {
-    searchTerm = '';
-    movies;
-    @wire(searchMovies,{searchTerm:'$searchTerm'})
-    loadBears(result) {
-        this.movies = result;
-        
-    }
+  searchTerm = '';
+  movies;
+  subscription = null;
 
-    handleSearchTermChange(event) {
-		
-		window.clearTimeout(this.delayTimeout);
-		const searchTerm = event.target.value;
-		// eslint-disable-next-line @lwc/lwc/no-async-operation
-		this.delayTimeout = setTimeout(() => {
-			this.searchTerm = searchTerm;
-		}, 300);
-	}
+  @wire(MessageContext)
+  messageContext;
+  @wire(searchMovies, { searchTerm: '$searchTerm' })
+  loadMovies(result) {
+    this.movies = result;
 
-    get hasResults() {
-		return (this.movies.data.length > 0);
-	}
+  }
+
+  connectedCallback() {
+    this.subscription = subscribe(this.messageContext, REFRESH_MOVIE_LIST, () => {
+      refreshApex(this.movies);
+    })
+  }
+
+  disconnectedCallback() {
+    unsubscribe(this.subscription);
+    this.subscription = null;
+  }
+
+  handleSearchTermChange(event) {
+    window.clearTimeout(this.delayTimeout);
+    const searchTerm = event.target.value;
+    this.delayTimeout = setTimeout(() => {
+      this.searchTerm = searchTerm;
+    }, 300);
+  }
+
+  get hasResults() {
+    return (this.movies.data.length > 0);
+  }
 }

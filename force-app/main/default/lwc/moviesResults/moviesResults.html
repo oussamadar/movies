@@ -12,6 +12,10 @@
 					placeholder="Search for movies"
 					value={searchTerm}>
 				</lightning-input>
+				<div>
+					<lightning-button label="add-movie" class="slds-button slds-button_outline-brand" onclick={openAddModal}> Outline Brand Button</lightning-button>
+
+				</div>
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={movies.data} for:item="movie">
 						<lightning-layout-item key={movie.Id} size="4" class="slds-var-p-around_x-small">

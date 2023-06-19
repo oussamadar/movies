@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>MoviePreview</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message Channel to pass movieId to moviePreview component</description>
+     <lightningMessageFields>
+        <fieldName>id</fieldName>
+        <description>This is the id of the movie</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>poster</fieldName>
+        <description>This is the url of the image movie</description>
+    </lightningMessageFields>
+     
+</LightningMessageChannel>
