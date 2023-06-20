@@ -1,21 +1,32 @@
 <template>
-	<lightning-card title="Movies" icon-name="utility:video">
+	<lightning-card title="Movies" icon-name="utility:video" >
 		<div class="slds-card__body slds-card__body_inner">
 			<!-- Start movie list -->
-			
-			<template if:true={movies.data}>
-				<lightning-input type="search"
-					onchange={handleSearchTermChange}
-					variant="label-hidden"
-					class="slds-var-m-bottom_small"
-					label="Search"
-					placeholder="Search for movies"
-					value={searchTerm}>
-				</lightning-input>
-				<div>
-					<lightning-button label="add-movie" class="slds-button slds-button_outline-brand" onclick={openAddModal}> Outline Brand Button</lightning-button>
 
+			<template if:true={movies.data}>
+
+
+				<div class="slds-grid slds-gutters">
+					<div class="slds-col slds-size_2-of-3">
+						<lightning-input type="search" onchange={handleSearchTermChange} variant="label-hidden"
+							class="slds-var-m-bottom_small" label="Search" placeholder="Search for movies"
+							value={searchTerm}>
+						</lightning-input>
+
+					</div>
+					<div class="slds-col slds-size_1-of-3 ">
+						<div class="slds-clearfix">
+							<div class="slds-float_right">
+								<lightning-button onclick={handleOpenModal} aria-haspopup="dialog"
+									label="Add Movie" icon-name="utility:add">
+								</lightning-button>
+							</div>
+						</div>
+
+
+					</div>
 				</div>
+
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={movies.data} for:item="movie">
 						<lightning-layout-item key={movie.Id} size="4" class="slds-var-p-around_x-small">

@@ -1,8 +1,8 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import { unsubscribe, MessageContext, subscribe, publish } from 'lightning/messageService';
 import MOVIE_PREVIEW_CHANNEL from '@salesforce/messageChannel/Movie_Preview__c';
 import REFRESH_MOVIE_LIST from '@salesforce/messageChannel/Refresh_List__c';
-import { deleteRecord, getRecord,getFieldValue } from 'lightning/uiRecordApi';
+import { deleteRecord, getRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import NAME_FIELD from "@salesforce/schema/Movie__c.Name";
@@ -84,7 +84,5 @@ export default class MoviePreview extends LightningElement {
             })
         );
     }
-    handleInput(){
-        alert('f');
-    }
+   
 }
