@@ -10,17 +10,21 @@ import CATEGORY_FIELD from "@salesforce/schema/Movie__c.Category__c";
 import DESCRIPTION_FIELD from "@salesforce/schema/Movie__c.Description__c";
 import RELEASE_DATE_FIELD from "@salesforce/schema/Movie__c.Release_date__c";
 import MOVIE_OBJECT from "@salesforce/schema/Movie__c";
-import IMAGE_FIELD from "@salesforce/schema/Movie__c.Poster_url__c"
+import IMAGE_FIELD from "@salesforce/schema/Movie__c.Poster_url__c";
+import RATING_FIELD from "@salesforce/schema/Movie__c.Rating__c";
 
- 
+
+
+
 export default class MoviePreview extends LightningElement {
 
-    
+
     objectApiName = MOVIE_OBJECT;
-    fields = [NAME_FIELD, CATEGORY_FIELD, DESCRIPTION_FIELD, RELEASE_DATE_FIELD, IMAGE_FIELD];
+    fields = [NAME_FIELD, CATEGORY_FIELD, DESCRIPTION_FIELD, RELEASE_DATE_FIELD, IMAGE_FIELD, RATING_FIELD];
     subscription = null;
     moviePoster;
     movieId;
+    movieRating;
 
     @wire(MessageContext)
     messageContext;
@@ -31,11 +35,11 @@ export default class MoviePreview extends LightningElement {
     handleMessage(message) {
         this.movieId = message.id;
         this.moviePoster = message.poster;
+        this.movieRating = message.rating;
 
     }
 
     connectedCallback() {
-
         this.subscription = subscribe(
             this.messageContext,
             MOVIE_PREVIEW_CHANNEL,
@@ -43,25 +47,18 @@ export default class MoviePreview extends LightningElement {
                 this.handleMessage(message);
             });
     }
+
     disconnectedCallback() {
         unsubscribe(this.subscription);
         this.subscription = null;
     }
 
-    handleDelete(event) {
-        
+    handleDelete() {
+
         deleteRecord(this.movieId)
             .then(() => {
+                this.movieId = null
                 publish(this.messageContext, REFRESH_MOVIE_LIST);
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Movie deleted',
-                        variant: 'success'
-                    })
-                );
-                this.movieId = null;
-
             })
             .catch(error => {
                 this.dispatchEvent(
@@ -76,13 +73,6 @@ export default class MoviePreview extends LightningElement {
 
     editHandler() {
         publish(this.messageContext, REFRESH_MOVIE_LIST);
-        this.dispatchEvent(
-            new ShowToastEvent({
-                title: 'Success',
-                message: 'Movie updated successfully',
-                variant: 'success'
-            })
-        );
     }
-   
+
 }

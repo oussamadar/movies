@@ -4,9 +4,11 @@
             <div onclick={handleSelectMovie}>
                 <p><img src={movie.Poster_url__c} class="slds-var-m-bottom_small image-dem" /></p>
             </div>
-            <div class="slds-text-heading_medium"> {movie.Name}</div>
-            <div class="slds-text-color_weak"> {movie.Category__c}</div>
-            <div class="slds-text-color_weak"> {movie.Release_date__c}</div>
+          
+                <div class=" slds-align_absolute-center slds-text-heading_medium"> {movie.Name}</div>
+                <div class="slds-text-color_weak slds-align_absolute-center"> {movie.Category__c}</div>
+                <div class="slds-text-color_weak slds-align_absolute-center" > {movie.Release_date__c}</div>
+                <div class="slds-align_absolute-center ">  <c-rating read-only-star static-color="#787160" rating={movie.Rating__c}></c-rating></div>                
 
         </div>
 

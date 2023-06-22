@@ -7,11 +7,10 @@ export default class MovieTile extends LightningElement {
     @wire(MessageContext)
     messageContext;
     handleSelectMovie() {
-        console.log(this.movie.Id);
         const selectedMovie = {
             id: this.movie.Id,
-            poster: this.movie.Poster_url__c
-            
+            poster: this.movie.Poster_url__c,
+            rating: this.movie.Rating__c
         };
         publish(this.messageContext, MOVIE_PREVIEW_CHANNEL, selectedMovie);
 

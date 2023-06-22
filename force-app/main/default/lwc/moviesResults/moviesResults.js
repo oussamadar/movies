@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import searchMovies from '@salesforce/apex/MovieController.searchMovies';
 import REFRESH_MOVIE_LIST from '@salesforce/messageChannel/Refresh_List__c';
 import { refreshApex } from '@salesforce/apex';
@@ -10,8 +10,7 @@ export default class MoviesResults extends LightningElement {
   searchTerm = '';
   movies;
   subscription = null;
-  @track
-  isOpen = false;
+
 
   @wire(MessageContext)
   messageContext;
@@ -23,6 +22,11 @@ export default class MoviesResults extends LightningElement {
 
   connectedCallback() {
     this.subscription = subscribe(this.messageContext, REFRESH_MOVIE_LIST, () => {
+      this.showToastMessage(
+        'Success',
+        'Operation Executed Successefully',
+        'Success'
+      );
       refreshApex(this.movies);
     })
   }
@@ -44,26 +48,22 @@ export default class MoviesResults extends LightningElement {
     return (this.movies.data.length > 0);
   }
 
-  
 
-  handleMovieCreated() {
-    refreshApex(this.movies);
-    this.dispatchEvent(
-      new ShowToastEvent({
-        title: 'Success',
-        message: 'Movie updated successfully',
-        variant: 'success'
-      })
-    );
-  }
-
-async handleOpenModal() {
-  const result = await CreateMovieModal.open({
-      
+  async handleOpenModal() {
+    const result = await CreateMovieModal.open({
       size: 'small',
       description: 'Modal to create new movie',
-  });
-  
-}
-  
+    });
+
+  }
+
+  showToastMessage(title, message, variant) {
+    const event = new ShowToastEvent({
+      title,
+      message,
+      variant
+    });
+    this.dispatchEvent(event);
+  }
+
 }

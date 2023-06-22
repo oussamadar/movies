@@ -1,10 +1,47 @@
 <template>
-    
-        <lightning-modal-body class="movie-tile">
-            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
-                <lightning-record-form object-api-name={apiObjectName} fields={fields} onsuccess={successModal}
-                    oncancel={closeModal}></lightning-record-form>
+    <lightning-modal-header label="Create Movie"></lightning-modal-header>
+
+    <lightning-modal-body>
+        <lightning-record-edit-form object-api-name={objectApiName} onsuccess={handleMovieCreated}>
+            <lightning-messages></lightning-messages>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name={nameField}></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name={releaseDateField}></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name={categoryField}></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name={ratingField}></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                    <lightning-input-field field-name={pictureField}></lightning-input-field>
+
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+
+                    <c-lookup onsearch={handleSearchActor} onselectionchange={handleSelectionActor}
+                        is-multi-entry="true" label="Actors" selection={initialSelection}>
+                    </c-lookup>
+
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                    <lightning-input-field field-name={descriptionField}></lightning-input-field>
+                </div>
+
             </div>
-        </lightning-modal-body>
-   
+            <div class="slds-align_absolute-center ">
+                <lightning-button variant="destructive-text" label="Cancel" onclick={handleClose}
+                    class="slds-var-m-right_small"></lightning-button>
+                <lightning-button type="submit" variant="brand" label="Save"></lightning-button>
+                
+            </div>
+
+        </lightning-record-edit-form>
+
+
+    </lightning-modal-body>
 </template>

@@ -10,7 +10,8 @@ public with sharing class MovieController {
                 Category__c,
                 Poster_url__c,
                 Description__c,
-                Release_date__c	
+                Release_date__c,
+                Rating__c
             FROM Movie__c
             WITH SECURITY_ENFORCED
             ORDER BY Name desc
@@ -33,7 +34,8 @@ public with sharing class MovieController {
                 Category__c,
                 Poster_url__c,
                 Description__c,
-                Release_date__c	
+                Release_date__c,
+                Rating__c
             FROM Movie__c
             WHERE Name LIKE :searchTerm
             WITH SECURITY_ENFORCED

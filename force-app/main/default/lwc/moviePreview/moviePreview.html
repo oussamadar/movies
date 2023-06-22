@@ -5,15 +5,21 @@
                 <div>
                     <p><img src={moviePoster} class="slds-var-p-around_xx-large .slds-size_x-small" /></p>
                 </div>
-            
+                <div class="slds-align_absolute-center  ">
+                     <c-rating read-only-star static-color="#787160" rating={movieRating}></c-rating>
+                </div>
+
+
                 <lightning-record-form object-api-name={objectApiName} fields={fields} record-id={movieId} mode="view"
                     onsuccess={editHandler}>
                 </lightning-record-form>
-                
+
+
                 <div class="slds-align_absolute-center slds-var-m-top_small">
-                    <lightning-button variant="destructive" label="Delete" 
-                        onclick={handleDelete} class="slds-var-m-left_x-small"></lightning-button>
+                    <lightning-button variant="destructive" label="Delete" onclick={handleDelete}
+                        class="slds-var-m-left_x-small"></lightning-button>
                 </div>
+
 
             </div>
         </lightning-card>

@@ -11,5 +11,8 @@
         <fieldName>poster</fieldName>
         <description>This is the url of the image movie</description>
     </lightningMessageFields>
-     
+     <lightningMessageFields>
+        <fieldName>rating</fieldName>
+        <description>This is the rating of the movie</description>
+    </lightningMessageFields>
 </LightningMessageChannel>
