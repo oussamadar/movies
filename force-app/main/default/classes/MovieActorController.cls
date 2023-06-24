@@ -1,6 +1,10 @@
 public with sharing class MovieActorController {
    @AuraEnabled
    public static void createMovieActor(Id movieId, List<Id> actorsIds) {
+    System.debug(movieId);
+    System.debug(actorsIds);
+
+
     List<MovieActor__c> movieActors = new List<MovieActor__c>{};
     for (Id actorId : actorsIds) {
         movieActors.add(
