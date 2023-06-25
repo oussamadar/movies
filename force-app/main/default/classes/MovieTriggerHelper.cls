@@ -9,7 +9,7 @@ public with sharing class MovieTriggerHelper {
             WHERE Id IN (SELECT Actor__c FROM MovieActor__c WHERE Movie__c IN :movieIds )
             WITH SECURITY_ENFORCED
         ];
-        System.debug('actors to update' + actors);
+        
         for (Actor__c actor : actors) {
             actor.Number_of_movies__c--;
         }

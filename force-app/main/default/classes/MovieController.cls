@@ -20,12 +20,11 @@ public with sharing class MovieController {
     }
     @AuraEnabled(cacheable=true scope='global')
     public static Movie__c[] searchMovies(String searchTerm) {
-        // Return all movies when no search term
+       
         searchTerm = searchTerm.trim();
         if (searchTerm == '') {
             return getAllMovies();
         }
-        //Prepare Query paramters
         searchTerm = '%' + searchTerm + '%';
         return [
             SELECT
