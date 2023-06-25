@@ -1,10 +1,10 @@
 @IsTest
 public class TestDataFactory {
-   public static List<Movie__c> createMovies(Integer numberOfMovies) {
+   public static List<Movie__c> createMovies(Integer numberOfMovies, Date releaseDate) {
         List<Movie__c> movies = new List<Movie__c>();
         for (Integer i = 0; i < numberOfMovies; i++) {
             movies.add(
-                new Movie__c(Name = 'Movie' + i, Category__c = 'Action')
+                new Movie__c(Name = 'Movie' + i, Category__c = 'Action', Release_date__c = releaseDate)
         );
     }
    

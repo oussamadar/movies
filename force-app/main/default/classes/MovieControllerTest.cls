@@ -2,7 +2,7 @@
 public with sharing class MovieControllerTest {
    @testSetup
    static void makeData(){
-    TestDataFactory.createMovies(3); 
+    TestDataFactory.createMovies(3,  Date.today()); 
    }
 
    @isTest

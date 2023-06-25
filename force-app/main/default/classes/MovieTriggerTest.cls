@@ -5,7 +5,7 @@ public with sharing class MovieTriggerTest {
 
     @testSetup 
     static void setup() {
-        List<Id> moviesIds = new List<Id> ( (new Map<Id,Movie__c>( TestDataFactory.createMovies(2))).keySet() );
+        List<Id> moviesIds = new List<Id> ( (new Map<Id,Movie__c>( TestDataFactory.createMovies(2, Date.today()))).keySet() );
         List<Id> actorsIds = new List<Id> ( ( new Map<Id,Actor__c>( TestDataFactory.createActors(1, MALE))).keySet() );
         actorsIds.addAll( new List<Id>( (new Map<Id,Actor__c>(TestDataFactory.createActors(1, FEMALE))).keySet()) );
         TestDataFactory.createMovieActor(moviesIds, actorsIds); 

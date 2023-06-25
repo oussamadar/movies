@@ -6,7 +6,7 @@ public with sharing class MovieActorTriggerTest {
 
     @TestSetup 
     static void makeData() {
-      TestDataFactory.createMovies(3);
+      TestDataFactory.createMovies(3, Date.today());
       TestDataFactory.createActors(2, MALE); 
       TestDataFactory.createActors(2, FEMALE); 
     }
