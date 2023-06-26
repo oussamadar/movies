@@ -6,7 +6,6 @@ public with sharing class MovieBatch implements Database.Batchable<SObject> {
 
     public void execute(Database.BatchableContext bc, List<SObject> scope) {
         List<Movie__c> movies = new List<Movie__c>();
-        System.debug('inside batch');
         for(Movie__c movie : (List<Movie__c>) scope) {
             
             if(movie.Release_date__c <= Date.today()) {
